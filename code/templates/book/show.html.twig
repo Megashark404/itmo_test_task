@@ -1,0 +1,34 @@
+{% extends 'book/layout.html.twig' %}
+
+{% block header %}{{ book.title }}{% endblock %}
+
+{% block page_contents %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="book-cover" style="width: 250px;  display: inline-block; margin-right: 10px;">
+            <img style="max-width: 250px;" src="{{ asset('uploads/book_covers/' ~ book.coverFileName) }}">
+        </div>
+        <div class="book-detail" style="width: 500px; display: inline-block">
+            <h4>{{ book.authorsString() }}</h4>
+
+            <ul class="book_info">
+            <li>
+                <span>Год:</span>
+                <span>{{ book.year }}</span>
+            </li>
+            <li>
+                <span>Страниц:</span>
+                <span>{{ book.pages }}</span>
+            </li>
+            <li>
+                <span>ISBN:</span>
+                <span>{{ book.isbn }}</span>
+            </li>
+        </ul>
+        </div>
+    </div>
+
+{% endblock %}

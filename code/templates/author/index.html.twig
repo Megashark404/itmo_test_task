@@ -1,0 +1,28 @@
+{% extends 'book/layout.html.twig' %}
+
+{% block header %}Список авторов{% endblock %}
+
+{% block page_contents %}
+    <div class="m-2">
+        <a href="/author/create" class="btn btn-primary">Добавить автора</a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <div class="books-index row">
+        {% for author in authors %}
+            <div class="m-2">
+                    <div class="fw-bold"> {{ author.getFio() }}</div>
+                <div class="right">
+                    <a href="/author/{{ author.getId() }}" class="btn btn-success">Открыть</a>
+                    <a href="/author/edit/{{ author.getId() }}" class="btn btn-success">Редактировать</a>
+                    <a href="/author/delete/{{ author.getId() }}" class="btn btn-warning">Удалить</a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

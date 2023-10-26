@@ -1,0 +1,15 @@
+{% extends 'book/layout.html.twig' %}
+
+
+{% block page_contents %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="author-detail" style="width: 500px; display: inline-block">
+            <h4>{{ author.getFio() }}</h4>
+        </div>
+    </div>
+
+{% endblock %}

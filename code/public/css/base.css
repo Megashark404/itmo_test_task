@@ -1,0 +1,9 @@
+body{
+    padding: 10px;
+}
+.book-cover img {
+    border: 1px solid silver;
+}
+.form-group {
+    margin-bottom: 10px;
+}
