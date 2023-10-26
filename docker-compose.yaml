@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: itmo/nginx
+    container_name: itmo_webserver
+    ports:
+      - "80:80"
+    volumes:
+       - ./code:/data/mysite.local
+       - ./socket:/var/run/
+    networks:
+      - app-network
+
+  php-fpm:
+    build:
+      context: ./fpm
+      dockerfile: Dockerfile
+    image: itmo/php
+    container_name: itmo_php
+    volumes:
+       - ./code:/data/mysite.local
+       - ./socket:/var/run/
+    networks:
+      - app-network
+
+  db:
+    container_name: itmo_db
+    image: mariadb
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    restart: always
+    networks:
+      - app-network
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./sqldump/itmo_initial_db.sql:/docker-entrypoint-initdb.d/itmo_db.sql
+
+networks:
+  app-network:
+    driver: bridge
