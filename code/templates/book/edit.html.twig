@@ -1,0 +1,15 @@
+{% extends 'book/layout.html.twig' %}
+
+{% block header %}Редактировать книгу{% endblock %}
+
+{% block page_contents %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_row(form.cover_file_name) }}
+    {% if form.cover_file_name %}
+        <img src="/uploads/book_covers/{{ book.getCoverFileName() }}" height="100">
+    {% endif %}
+
+
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

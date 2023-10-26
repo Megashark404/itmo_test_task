@@ -1,0 +1,29 @@
+{% extends 'book/layout.html.twig' %}
+
+{% block header %}Список книг{% endblock %}
+
+{% block page_contents %}
+    <div class="m-2">
+        <a href="/book/create" class="btn btn-primary">Добавить книгу</a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <div class="books-index row">
+        {% for book in books %}
+            <div class="m-2">
+                    <div class="fw-bold"> {{ book.getTitle() }}. {{ book.getAuthorsString() }}</div>
+                    <div>ISBN: {{ book.getIsbn() }}. Год издания: {{ book.getYear() }}</div>
+                <div class="right">
+                    <a href="/book/{{ book.getId() }}" class="btn btn-success">Открыть</a>
+                    <a href="/book/edit/{{ book.getId() }}" class="btn btn-success">Редактировать</a>
+                    <a href="/book/delete/{{ book.getId() }}" class="btn btn-warning">Удалить</a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

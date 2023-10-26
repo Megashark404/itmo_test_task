@@ -1,0 +1,9 @@
+{% extends 'book/layout.html.twig' %}
+
+{% block header %}Добавить нового автора{% endblock %}
+
+{% block page_contents %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
