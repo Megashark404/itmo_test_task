@@ -27,6 +27,10 @@ class FileUploader
             $file->move($this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {
             // ... TODO
+            echo '<pre>';
+            var_dump($e->getMessage());
+            echo '</pre>';
+            exit;
         }
 
         return $fileName;
