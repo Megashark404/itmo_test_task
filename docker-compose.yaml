@@ -8,7 +8,7 @@ services:
     image: itmo/nginx
     container_name: itmo_webserver
     ports:
-      - "80:80"
+      - "8590:80"
     volumes:
        - ./code:/data/mysite.local
        - ./socket:/var/run/
