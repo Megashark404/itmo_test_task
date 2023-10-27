@@ -26,6 +26,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 RUN addgroup --gid 101 --system nginx
 RUN adduser --uid 101 --system --disabled-login --disabled-password --gid 33 nginx
 
-WORKDIR /data
+WORKDIR /data/mysite.local
 
 CMD ["php-fpm"]
